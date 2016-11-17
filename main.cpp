@@ -1,34 +1,39 @@
 
 #include "ABElectronics_C_Libraries/IOPi/ABE_IoPi.h"
 
+#include "OutPin.hpp"
+
 #include <iostream>
 #include <unistd.h>
+#include <vector>
 
 void
-setAll(int value)
+setAllHigh(std::vector<OutPinPtr> pins)
 {
-  for (int i = 0; i < 16; ++i)
-    write_pin(0x21, i, value);
+  for (auto pin : pins)
+    pin->writeHigh();
 }
 
 void
-setAllPortDirections()
+setAllLow(std::vector<OutPinPtr> pins)
 {
-  for (int i = 0; i < 16; ++i)
-    set_port_direction(0x21, i, 0x00);
+  for (auto pin : pins)
+    pin->writeLow();
 }
 
 int main()
 {
   IOPi_init(0x21);
 
-  setAllPortDirections();
+  std::vector<OutPinPtr> pins;
+  for (int i = 0; i < 16; ++i)
+    pins.push_back(OutPinPtr(new OutPin(0x21, i)));
   
   while (true)
   {
-    setAll(0);
+    setAllLow(pins);
     usleep(1000000);
-    setAll(1);
+    setAllHigh(pins);
     usleep(1000000);
   }
 
