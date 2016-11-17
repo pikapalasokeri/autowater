@@ -1,7 +1,7 @@
+#include "PinFactory.hpp"
+#include "OutPin.hpp"
 
 #include "ABElectronics_C_Libraries/IOPi/ABE_IoPi.h"
-
-#include "OutPin.hpp"
 
 #include <iostream>
 #include <unistd.h>
@@ -23,12 +23,12 @@ setAllLow(std::vector<OutPinPtr> pins)
 
 int main()
 {
-  IOPi_init(0x21);
-
+  PinFactory pinFactory;
+  
   std::vector<OutPinPtr> pins;
   for (int i = 0; i < 16; ++i)
-    pins.push_back(OutPinPtr(new OutPin(0x21, i)));
-  
+    pins.push_back(pinFactory.createOutPin(0x21, i));
+    
   while (true)
   {
     setAllLow(pins);
