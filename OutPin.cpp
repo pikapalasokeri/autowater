@@ -6,7 +6,7 @@ OutPin::OutPin(char adress, int pinNumber)
   : adress_(adress),
     pinNumber_(pinNumber)
 {
-  set_port_direction(adress_, pinNumber_, 0x00);
+  set_pin_direction(adress_, pinNumber_, 0x00);
 }
 
 void
