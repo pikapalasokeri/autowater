@@ -1,4 +1,4 @@
-#include "PinFactory.hpp"
+#include "PinHandler.hpp"
 #include "OutPin.hpp"
 
 #include "ABElectronics_C_Libraries/IOPi/ABE_IoPi.h"
@@ -8,14 +8,14 @@
 #include <vector>
 
 void
-setAllHigh(std::vector<OutPinPtr> pins)
+setAllHigh(std::vector<OutPin*> pins)
 {
   for (auto pin : pins)
     pin->writeHigh();
 }
 
 void
-setAllLow(std::vector<OutPinPtr> pins)
+setAllLow(std::vector<OutPin*> pins)
 {
   for (auto pin : pins)
     pin->writeLow();
@@ -23,11 +23,11 @@ setAllLow(std::vector<OutPinPtr> pins)
 
 int main()
 {
-  PinFactory pinFactory;
+  PinHandler pinHandler;
   
-  std::vector<OutPinPtr> pins;
+  std::vector<OutPin*> pins;
   for (int i = 0; i < 16; ++i)
-    pins.push_back(pinFactory.createOutPin(0x21, i));
+    pins.push_back(pinHandler.createOutPin(0x21, i));
     
   while (true)
   {

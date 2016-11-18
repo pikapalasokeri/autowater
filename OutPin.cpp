@@ -1,6 +1,7 @@
 #include "OutPin.hpp"
 #include "ABElectronics_C_Libraries/IOPi/ABE_IoPi.h"
 
+
 OutPin::OutPin(char adress, int pinNumber)
   : adress_(adress),
     pinNumber_(pinNumber)

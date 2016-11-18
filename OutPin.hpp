@@ -3,20 +3,20 @@
 
 #include <memory>
 
-class PinFactory;
+class PinHandler;
 
 class OutPin
 {
 public:
   void writeHigh();
   void writeLow();
-  
+
   OutPin(const OutPin&) = delete;
   OutPin& operator=(const OutPin&) = delete;
   
 private:
   OutPin(char adress, int pinNumber);
-  friend PinFactory;
+  friend PinHandler;
   
   const char adress_;
   const int pinNumber_;
