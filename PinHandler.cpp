@@ -24,8 +24,8 @@ PinHandler::createDigitalOutPin(char adress, int pinNumber)
   makeSureIsInitialized(adress);
   verify(adress, pinNumber);
 
-  outPins_.emplace_back(new DigitalOutPin(adress, pinNumber));
-  return outPins_.back().get();
+  digitalOutPins_.emplace_back(new DigitalOutPin(adress, pinNumber));
+  return digitalOutPins_.back().get();
 }
 
 AnalogInPin*

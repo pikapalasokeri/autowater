@@ -21,7 +21,7 @@ private:
   void verify(char adress, int pinNumber);
   void makeSureIsInitialized(char adress);
 
-  std::vector<DigitalOutPinPtr> outPins_;
+  std::vector<DigitalOutPinPtr> digitalOutPins_;
   std::vector<AnalogInPinPtr> analogInPins_;
 
   
