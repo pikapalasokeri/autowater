@@ -1,6 +1,7 @@
 #include "PinHandler.hpp"
 
-#include "OutPin.hpp"
+#include "DigitalOutPin.hpp"
+#include "AnalogInPin.hpp"
 #include "ABElectronics_C_Libraries/IOPi/ABE_IoPi.h"
 #include <memory>
 #include <sstream>
@@ -17,14 +18,22 @@ PinHandler::PinHandler()
   alreadyCreated_ = true;
 }
 
-OutPin*
-PinHandler::createOutPin(char adress, int pinNumber)
+DigitalOutPin*
+PinHandler::createDigitalOutPin(char adress, int pinNumber)
 {
   makeSureIsInitialized(adress);
   verify(adress, pinNumber);
 
-  outPins_.emplace_back(new OutPin(adress, pinNumber));
+  outPins_.emplace_back(new DigitalOutPin(adress, pinNumber));
   return outPins_.back().get();
+}
+
+AnalogInPin*
+PinHandler::createAnalogInPin(char adress, char pinNumber)
+{
+  makeSureIsInitialized(adress);
+  verify(adress, pinNumber);
+  return nullptr;
 }
 
 void

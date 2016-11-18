@@ -1,8 +1,8 @@
-#include "OutPin.hpp"
+#include "DigitalOutPin.hpp"
 #include "ABElectronics_C_Libraries/IOPi/ABE_IoPi.h"
 
 
-OutPin::OutPin(char adress, int pinNumber)
+DigitalOutPin::DigitalOutPin(char adress, int pinNumber)
   : adress_(adress),
     pinNumber_(pinNumber)
 {
@@ -10,13 +10,13 @@ OutPin::OutPin(char adress, int pinNumber)
 }
 
 void
-OutPin::writeHigh()
+DigitalOutPin::writeHigh()
 {
   write_pin(adress_, pinNumber_, 1);
 }
 
 void
-OutPin::writeLow()
+DigitalOutPin::writeLow()
 {
   write_pin(adress_, pinNumber_, 0);
 }
