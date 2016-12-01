@@ -7,6 +7,7 @@ class PinHandler;
 
 class AnalogInPin
 {
+public:
   AnalogInPin(const AnalogInPin&) = delete;
   AnalogInPin& operator=(const AnalogInPin&) = delete;
 

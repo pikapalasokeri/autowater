@@ -35,7 +35,7 @@ PinHandler::createAnalogInPin(char adress, char pinNumber)
   verify(adress, pinNumber);
 
   analogInPins_.emplace_back(new AnalogInPin(adress, pinNumber));
-  return nullptr;
+  return analogInPins_.back().get();
 }
 
 void
