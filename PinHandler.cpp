@@ -33,6 +33,8 @@ PinHandler::createAnalogInPin(char adress, char pinNumber)
 {
   makeSureIsInitialized(adress);
   verify(adress, pinNumber);
+
+  analogInPins_.emplace_back(new AnalogInPin(adress, pinNumber));
   return nullptr;
 }
 
