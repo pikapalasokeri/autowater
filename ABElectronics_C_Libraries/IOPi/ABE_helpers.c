@@ -21,12 +21,12 @@
 #include <linux/i2c-dev.h>
 
 static int i2cbus;
-const char *fileName = "/dev/i2c-1"; // change to /dev/i2c-0 if you are using a revision 0002 or 0003 model B
+const char *fileNameHelper = "/dev/i2c-1"; // change to /dev/i2c-0 if you are using a revision 0002 or 0003 model B
 unsigned char buf[10] = { 0 };
 
 int read_byte_data(char address, char reg) {
 
-	if ((i2cbus = open(fileName, O_RDWR)) < 0) {
+	if ((i2cbus = open(fileNameHelper, O_RDWR)) < 0) {
 		printf("Failed to open i2c port for read %s \n", strerror(errno));
 
 		exit(1);
@@ -55,7 +55,7 @@ int read_byte_data(char address, char reg) {
 }
 
 void write_byte_data(char address, char reg, char value) {
-	if ((i2cbus = open(fileName, O_RDWR)) < 0) {
+	if ((i2cbus = open(fileNameHelper, O_RDWR)) < 0) {
 		printf("Failed to open i2c port for write\n");
 		exit(1);
 	}
