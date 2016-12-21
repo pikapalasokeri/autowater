@@ -1,3 +1,4 @@
+#include "WateringUnitManager.hpp"
 #include "PinHandler.hpp"
 #include "DigitalOutPin.hpp"
 
@@ -32,7 +33,9 @@ printVoltages(const std::vector<AnalogInPin*> pins)
 int main()
 {
   PinHandler pinHandler;
-  
+  WateringUnitManager manager(pinHandler);
+  manager.run();
+  /*
   std::vector<DigitalOutPin*> outPins;
   for (int i = 0; i < 16; ++i)
     outPins.push_back(pinHandler.createDigitalOutPin(0x21, i));
@@ -50,6 +53,7 @@ int main()
 
     printVoltages(inPins);
   }
+  */
 
   return 0;
 }
