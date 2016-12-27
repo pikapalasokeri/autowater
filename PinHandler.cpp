@@ -28,7 +28,7 @@ PinHandler::createDigitalOutPin(char adress, int pinNumber)
   makeSureIsInitialized(adress);
   verify(adress, pinNumber);
 
-  digitalOutPins_.emplace_back(new DigitalOutPin(adress, pinNumber));
+  digitalOutPins_.emplace_back(new DigitalOutPin(adress, pinNumber, globalPinCommunicationMutex_));
   return digitalOutPins_.back().get();
 }
 
@@ -38,7 +38,7 @@ PinHandler::createAnalogInPin(char adress, char pinNumber)
   makeSureIsInitialized(adress);
   verify(adress, pinNumber);
 
-  analogInPins_.emplace_back(new AnalogInPin(adress, pinNumber));
+  analogInPins_.emplace_back(new AnalogInPin(adress, pinNumber, globalPinCommunicationMutex_));
   return analogInPins_.back().get();
 }
 

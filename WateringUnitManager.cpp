@@ -33,10 +33,18 @@ WateringUnitManager::run()
 void
 WateringUnitManager::createWateringUnits(PinHandler& pinHandler)
 {
-  for (int i = 0; i < 4; ++i)
-  {
-    wateringUnits_.push_back(WateringUnit(pinHandler.createDigitalOutPin(0x21, i),
-					  pinHandler.createAnalogInPin(0x68, i)));
-  }
+    const double humidityThreshold = 0.2;
+    wateringUnits_.push_back(WateringUnit(pinHandler.createDigitalOutPin(0x21, 1),
+					  pinHandler.createAnalogInPin(0x68, 0),
+					  humidityThreshold));
+    wateringUnits_.push_back(WateringUnit(pinHandler.createDigitalOutPin(0x21, 2),
+					  pinHandler.createAnalogInPin(0x68, 1),
+					  humidityThreshold));
+    wateringUnits_.push_back(WateringUnit(pinHandler.createDigitalOutPin(0x21, 3),
+					  pinHandler.createAnalogInPin(0x68, 2),
+					  humidityThreshold));
+    wateringUnits_.push_back(WateringUnit(pinHandler.createDigitalOutPin(0x21, 14),
+					  pinHandler.createAnalogInPin(0x68, 3),
+					  humidityThreshold));
 }
 

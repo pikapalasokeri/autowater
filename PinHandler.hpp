@@ -6,6 +6,7 @@
 #include <vector>
 #include <unordered_map>
 #include <unordered_set>
+#include <mutex>
 
 class PinHandler
 {
@@ -28,6 +29,8 @@ private:
   using IntSet = std::unordered_set<int>;
   using AdressPinsMap = std::unordered_map<char, IntSet>;
   AdressPinsMap occupiedAdressPins_;
+
+  std::mutex globalPinCommunicationMutex_;
   
   static bool alreadyCreated_;
 };

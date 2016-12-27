@@ -2,6 +2,7 @@
 #define AnalogInPin_hpp
 
 #include <memory>
+#include <mutex>
 
 class PinHandler;
 
@@ -12,9 +13,13 @@ public:
   AnalogInPin& operator=(const AnalogInPin&) = delete;
 
   double readVoltage() const;
+
+  static const double maxVoltage;
   
 private:
-  AnalogInPin(char address, char channel);
+  AnalogInPin(char address,
+	      char channel,
+	      std::mutex& globalPinCommunicationMutex);
   friend PinHandler;
 
   const char address_;
@@ -23,6 +28,7 @@ private:
                       // 17 is max according to web page
   const int pga_; // programmable gain amplifier
   const char conversionMode_; // 0 = one shot conversion, 1 = coninuous conversion
+  std::mutex& globalPinCommunicationMutex_;
 };
 
 using AnalogInPinPtr = std::shared_ptr<AnalogInPin>;
