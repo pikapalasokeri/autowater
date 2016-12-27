@@ -2,9 +2,13 @@
 
 #include "DigitalOutPin.hpp"
 #include "AnalogInPin.hpp"
-#include "ABElectronics_C_Libraries/IOPi/ABE_IoPi.h"
 #include <memory>
 #include <sstream>
+
+extern "C"
+{
+#include "ABElectronics_C_Libraries/IOPi/ABE_IoPi.h"
+}
 
 #undef NDEBUG
 #include <cassert>

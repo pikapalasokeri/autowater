@@ -1,6 +1,9 @@
 #include "DigitalOutPin.hpp"
-#include "ABElectronics_C_Libraries/IOPi/ABE_IoPi.h"
 
+extern "C"
+{
+#include "ABElectronics_C_Libraries/IOPi/ABE_IoPi.h"
+}
 
 DigitalOutPin::DigitalOutPin(char adress, int pinNumber)
   : adress_(adress),

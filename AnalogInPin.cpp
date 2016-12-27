@@ -1,6 +1,10 @@
 #include "AnalogInPin.hpp"
-#include "ABElectronics_C_Libraries/ADCPi/ABE_ADCPi.h"
 
+extern "C"
+{
+#include "ABElectronics_C_Libraries/ADCPi/ABE_ADCPi.h"
+}
+  
 AnalogInPin::AnalogInPin(char address, char channel)
   : address_(address),
     channel_(channel),
