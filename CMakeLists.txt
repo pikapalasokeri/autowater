@@ -10,6 +10,7 @@ add_library(
 core
 AnalogInPin.cpp
 DigitalOutPin.cpp
+Logger.cpp
 PinHandler.cpp
 WateringUnit.cpp
 WateringUnitManager.cpp)

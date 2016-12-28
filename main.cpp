@@ -1,6 +1,7 @@
 #include "WateringUnitManager.hpp"
 #include "PinHandler.hpp"
 #include "DigitalOutPin.hpp"
+#include "Logger.hpp"
 
 #include "ABElectronics_C_Libraries/IOPi/ABE_IoPi.h"
 

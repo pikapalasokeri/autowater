@@ -16,7 +16,7 @@ public:
   void run();
 private:
   void createWateringUnits(PinHandler&);
-  std::vector<WateringUnit> wateringUnits_;
+  std::vector<std::unique_ptr<WateringUnit> > wateringUnits_;
   std::vector<std::unique_ptr<std::thread> > threads_;
 };
 

@@ -20,7 +20,7 @@ WateringUnit::WateringUnit(DigitalOutPin* pumpControlPin,
 void
 WateringUnit::run()
 {
-  std::cout << this << " ::run" << std::endl;
+  logger_ << this << " ::run" << Logger::endl << Logger::flush;
   double lastHumidityVoltage = 0.0;
   
   while (true)
@@ -29,20 +29,21 @@ WateringUnit::run()
 
     const double humidityVoltage = humiditySensorPin_->readVoltage();
     
-    std::cout << this << " humidityVoltage: " << humidityVoltage << std::endl;
+    logger_ << this << " humidityVoltage: " << humidityVoltage << Logger::endl;
     
     if (lastHumidityVoltage < humidityVoltageThreshold_
 	&& humidityVoltage < humidityVoltageThreshold_)
     {
       pumpControlPin_->writeHigh();
-      std::cout << this << " pump set to high." << std::endl;
+      logger_ << this << " pump set to high." << Logger::endl;
     }
     else
     {
       pumpControlPin_->writeLow();
-      std::cout << this << " pump set to low." << std::endl;
+      logger_ << this << " pump set to low." << Logger::endl;
     }
-    
+
     lastHumidityVoltage = humidityVoltage;
+    logger_ << Logger::flush;
   }
 }
