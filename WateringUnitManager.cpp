@@ -1,8 +1,10 @@
 #include "WateringUnitManager.hpp"
 
 #include "PinHandler.hpp"
+#include "WateringUnitConfigReader.hpp"
 
-WateringUnitManager::WateringUnitManager(PinHandler& pinHandler)
+WateringUnitManager::WateringUnitManager(PinHandler& pinHandler, WateringUnitConfigReader& configReader)
+  : configReader_(configReader)
 {
   createWateringUnits(pinHandler);
 }
@@ -33,18 +35,9 @@ WateringUnitManager::run()
 void
 WateringUnitManager::createWateringUnits(PinHandler& pinHandler)
 {
-  const double humidityThreshold = 0.2;
-  wateringUnits_.emplace_back(new WateringUnit(pinHandler.createDigitalOutPin(0x21, 1),
-					       pinHandler.createAnalogInPin(0x68, 4),
-					       humidityThreshold));
-  wateringUnits_.emplace_back(new WateringUnit(pinHandler.createDigitalOutPin(0x21, 2),
-					       pinHandler.createAnalogInPin(0x68, 3),
-					       humidityThreshold));
-  wateringUnits_.emplace_back(new WateringUnit(pinHandler.createDigitalOutPin(0x21, 3),
-					       pinHandler.createAnalogInPin(0x68, 2),
-						 humidityThreshold));
-  wateringUnits_.emplace_back(new WateringUnit(pinHandler.createDigitalOutPin(0x21, 14),
-					       pinHandler.createAnalogInPin(0x68, 1),
-					       humidityThreshold));
+  while (configReader_.parseNext())
+  {
+    wateringUnits_.emplace_back(new WateringUnit(pinHandler, configReader_.getConfig()));
+  }
 }
 

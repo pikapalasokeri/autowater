@@ -2,19 +2,22 @@
 
 #include "AnalogInPin.hpp"
 #include "DigitalOutPin.hpp"
+#include "WateringUnitConfig.hpp"
+#include "PinHandler.hpp"
 
 #include <iostream>
 #include <chrono>
 #include <thread>
 
-WateringUnit::WateringUnit(DigitalOutPin* pumpControlPin,
-			   AnalogInPin* humiditySensorPin,
-			   double humidityThreshold)
-  : pumpControlPin_(pumpControlPin),
-    humiditySensorPin_(humiditySensorPin),
-    humidityVoltageThreshold_(humidityThreshold*AnalogInPin::maxVoltage)
+WateringUnit::WateringUnit(PinHandler& pinHandler, const WateringUnitConfig& config)
+  : pumpControlPin_(pinHandler.createDigitalOutPin(config.inqPumpAdress(), config.inqPumpPin())),
+    humiditySensorPin_(pinHandler.createAnalogInPin(config.inqSensorAdress(), config.inqSensorPin())),
+    humidityVoltageThreshold_(config.inqHumidityThreshold()*AnalogInPin::maxVoltage)
 {
   pumpControlPin_->writeLow();
+
+  logger_ << "Creating watering unit with config: " << Logger::endl
+	  << config << Logger::endl << Logger::endl << Logger::flush;
 }
 
 void

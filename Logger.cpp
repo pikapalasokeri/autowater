@@ -17,7 +17,7 @@ Logger::operator<<(Logger::FlushType)
 Logger&
 Logger::operator<<(Logger::EndlType)
 {
-    return (*this << "\n");
+  return (*this << "\n");
 }
 
 void

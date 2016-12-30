@@ -5,11 +5,13 @@
 
 class DigitalOutPin;
 class AnalogInPin;
+class PinHandler;
+class WateringUnitConfig;
 
 class WateringUnit
 {
 public:
-  WateringUnit(DigitalOutPin*, AnalogInPin*, double humidityThreshold);
+  WateringUnit(PinHandler&, const WateringUnitConfig&);
   void run();
 private:
   DigitalOutPin* const pumpControlPin_;

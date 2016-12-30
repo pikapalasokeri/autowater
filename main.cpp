@@ -1,4 +1,5 @@
 #include "WateringUnitManager.hpp"
+#include "WateringUnitConfigReader.hpp"
 #include "PinHandler.hpp"
 #include "DigitalOutPin.hpp"
 #include "Logger.hpp"
@@ -34,7 +35,8 @@ printVoltages(const std::vector<AnalogInPin*> pins)
 int main()
 {
   PinHandler pinHandler;
-  WateringUnitManager manager(pinHandler);
+  WateringUnitConfigReader configReader("config");
+  WateringUnitManager manager(pinHandler, configReader);
   manager.run();
   /*
   std::vector<DigitalOutPin*> outPins;

@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 2.6)
 
+FIND_PACKAGE(Boost 1.55 EXACT)
+
 add_library(
 abe
 ABElectronics_C_Libraries/IOPi/ABE_helpers.c
@@ -13,6 +15,8 @@ DigitalOutPin.cpp
 Logger.cpp
 PinHandler.cpp
 WateringUnit.cpp
+WateringUnitConfig.cpp
+WateringUnitConfigReader.cpp
 WateringUnitManager.cpp)
 
 add_executable(autowatering main.cpp)
