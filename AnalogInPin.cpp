@@ -14,7 +14,7 @@ AnalogInPin::AnalogInPin(char address,
     channel_(channel),
     bitRate_(18),
     pga_(1),
-    conversionMode_(0),
+    conversionMode_(1),
     globalPinCommunicationMutex_(globalPinCommunicationMutex)
 {}
 
