@@ -17,12 +17,12 @@ public:
   static const double maxVoltage;
   
 private:
-  AnalogInPin(char address,
+  AnalogInPin(char adress,
 	      char channel,
 	      std::mutex& globalPinCommunicationMutex);
   friend PinHandler;
 
-  const char address_;
+  const char adress_;
   const char channel_;
   const int bitRate_; // 12, 14, 16 or 18 according to header
                       // 17 is max according to web page

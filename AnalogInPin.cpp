@@ -7,10 +7,10 @@ extern "C"
 
 const double AnalogInPin::maxVoltage = 5.0;
   
-AnalogInPin::AnalogInPin(char address,
+AnalogInPin::AnalogInPin(char adress,
                          char channel,
                          std::mutex& globalPinCommunicationMutex)
-  : address_(address),
+  : adress_(adress),
     channel_(channel),
     bitRate_(18),
     pga_(1),
@@ -22,5 +22,5 @@ double
 AnalogInPin::readVoltage() const
 {
   std::lock_guard<std::mutex> lock(globalPinCommunicationMutex_);
-  return read_voltage(address_, channel_, bitRate_, pga_, conversionMode_);
+  return read_voltage(adress_, channel_, bitRate_, pga_, conversionMode_);
 }
