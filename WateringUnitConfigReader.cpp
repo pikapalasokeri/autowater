@@ -116,9 +116,9 @@ WateringUnitConfigReader::extractValueFromCurrentLine(const std::string& line)
     {
       interval_ = -1;
       valueStream >> *interval_;
-      if (*interval_ < 1)
+      if (*interval_ < 0)
       {
-	throw std::runtime_error("Interval must be 1 or greater.");
+	throw std::runtime_error("Interval must be 0 or greater.");
       }
     }
     else
