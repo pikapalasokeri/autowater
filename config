@@ -1,4 +1,4 @@
-{
+
 name=First from left
 logfile=first_from_left.log
 pump_adress=21
@@ -7,9 +7,9 @@ sensor_adress=68
 sensor_pin=4
 humidity_threshold=0.2
 interval=2
-}
 
-{
+
+
 name=Second from left
 logfile=second_from_left.log
 pump_adress=21
@@ -18,9 +18,9 @@ sensor_adress=68
 sensor_pin=3
 humidity_threshold=0.2
 interval=2
-}
 
-{
+
+
 name=Third from left
 logfile=third_from_left.log
 pump_adress=21
@@ -29,7 +29,7 @@ sensor_adress=68
 sensor_pin=2
 humidity_threshold=0.2
 interval=2
-}
+
 
 {
 name=Fourth from left
@@ -38,6 +38,6 @@ pump_adress=21
 pump_pin=14
 sensor_adress=68
 sensor_pin=1
-humidity_threshold=0.2
-interval=2
+humidity_threshold=0.4
+interval=30
 }
