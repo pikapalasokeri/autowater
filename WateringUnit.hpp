@@ -17,6 +17,8 @@ private:
   DigitalOutPin* const pumpControlPin_;
   AnalogInPin* const humiditySensorPin_;
   const double humidityVoltageThreshold_;
+  const int interval_;
+  const std::string name_;
   Logger logger_;
 };
 

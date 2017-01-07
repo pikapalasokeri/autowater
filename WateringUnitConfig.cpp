@@ -24,9 +24,9 @@ std::ostream& operator<<(std::ostream& stream, const WateringUnitConfig& config)
 {
   stream << "Name: " << config.inqName() << std::endl
 	 << "Log file path: " << config.inqLogFilePath() << std::endl
-	 << "Pump adress: " << std::hex << int(config.inqPumpAdress()) << std::endl
+	 << "Pump adress: " << std::hex << int(config.inqPumpAdress()) << std::dec << std::endl
 	 << "Pump pin: " << config.inqPumpPin() << std::endl
-	 << "Sensor adress: " << std::hex << int(config.inqSensorAdress()) << std::endl
+	 << "Sensor adress: " << std::hex << int(config.inqSensorAdress()) << std::dec << std::endl
 	 << "Sensor pin: " << config.inqSensorPin() << std::endl
 	 << "Humidity threshold: " << config.inqHumidityThreshold() << std::endl
 	 << "Interval: " << config.inqInterval();
