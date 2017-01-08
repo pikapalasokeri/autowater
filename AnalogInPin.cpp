@@ -5,8 +5,6 @@ extern "C"
 #include "ABElectronics_C_Libraries/ADCPi/ABE_ADCPi.h"
 }
 
-const double AnalogInPin::maxVoltage = 5.0;
-  
 AnalogInPin::AnalogInPin(char adress,
                          char channel,
                          std::mutex& globalPinCommunicationMutex)

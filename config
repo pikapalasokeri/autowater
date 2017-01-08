@@ -38,6 +38,6 @@ pump_adress=21
 pump_pin=14
 sensor_adress=68
 sensor_pin=1
-humidity_threshold=0.4
+humidity_threshold=3.0
 interval=30
 }

@@ -14,8 +14,6 @@ public:
 
   double readVoltage() const;
 
-  static const double maxVoltage;
-  
 private:
   AnalogInPin(char adress,
 	      char channel,
