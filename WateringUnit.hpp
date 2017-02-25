@@ -14,10 +14,13 @@ public:
   WateringUnit(PinHandler&, const WateringUnitConfig&);
   void run();
 private:
+  double getHumidityValue() const;
+  
   DigitalOutPin* const pumpControlPin_;
   AnalogInPin* const humiditySensorPin_;
-  const double humidityVoltageThreshold_;
+  const double humidityValueThreshold_;
   const int interval_;
+  const int waitIterations_;
   const std::string name_;
   Logger logger_;
 };

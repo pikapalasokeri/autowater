@@ -54,6 +54,7 @@ WateringUnitConfigReader::clearCurrentEntry()
   sensorPin_ = boost::none;
   humidityThreshold_ = boost::none;
   interval_ = boost::none;
+  waitIterations_ = boost::none;
   name_ = boost::none;
   logFilePath_ = boost::none;
   currentConfig_ = boost::none;
@@ -121,6 +122,15 @@ WateringUnitConfigReader::extractValueFromCurrentLine(const std::string& line)
 	throw std::runtime_error("Interval must be 0 or greater.");
       }
     }
+    else if (type == "wait_iterations")
+    {
+      waitIterations_ = -1;
+      valueStream >> *waitIterations_;
+      if (*waitIterations_ < 0)
+      {
+	throw std::runtime_error("Wait iterations must be non-negative.");
+      }
+    }	
     else
     {
       throw std::runtime_error("Unrecognized property name '" + type);
@@ -137,6 +147,7 @@ WateringUnitConfigReader::createCurrentConfig()
 				      *sensorPin_,
 				      *humidityThreshold_,
 				      *interval_,
+				      *waitIterations_,
 				      *name_,
 				      *logFilePath_);
 }

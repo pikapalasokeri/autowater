@@ -12,8 +12,9 @@
 WateringUnit::WateringUnit(PinHandler& pinHandler, const WateringUnitConfig& config)
   : pumpControlPin_(pinHandler.createDigitalOutPin(config.inqPumpAdress(), config.inqPumpPin())),
     humiditySensorPin_(pinHandler.createAnalogInPin(config.inqSensorAdress(), config.inqSensorPin())),
-    humidityVoltageThreshold_(config.inqHumidityThreshold()),
+    humidityValueThreshold_(config.inqHumidityThreshold()),
     interval_(config.inqInterval()),
+    waitIterations_(config.inqWaitIterations()),
     name_(config.inqName())
 {
   pumpControlPin_->writeLow();
@@ -26,29 +27,46 @@ void
 WateringUnit::run()
 {
   logger_ << name_ << "::run" << Logger::endl << Logger::flush;
-  double lastHumidityVoltage = 0.0;
+  double lastHumidityValue = 0.0;
+  int iterationsSinceLastWatering = waitIterations_;
   
   while (true)
   {
     std::this_thread::sleep_for(std::chrono::seconds(interval_));
 
-    const double humidityVoltage = humiditySensorPin_->readVoltage();
+    const double humidityValue = getHumidityValue();
     
-    logger_ << name_ << ": humidityVoltage: " << humidityVoltage << Logger::endl;
+    logger_ << name_ << ": humidityValue: " << humidityValue << Logger::endl;
     
-    if (lastHumidityVoltage < humidityVoltageThreshold_
-	&& humidityVoltage < humidityVoltageThreshold_)
+    if (lastHumidityValue < humidityValueThreshold_
+	&& humidityValue < humidityValueThreshold_
+	&& iterationsSinceLastWatering >= waitIterations_)
     {
       pumpControlPin_->writeHigh();
+      iterationsSinceLastWatering = 0;
       logger_ << name_ << ": pump set to high." << Logger::endl;
     }
     else
     {
       pumpControlPin_->writeLow();
+      ++iterationsSinceLastWatering;
       logger_ << name_ << ": pump set to low." << Logger::endl;
     }
 
-    lastHumidityVoltage = humidityVoltage;
+    lastHumidityValue = humidityValue;
     logger_ << Logger::flush;
   }
+}
+
+double
+WateringUnit::getHumidityValue() const
+{
+  double totalVoltage = 0.0;
+  const int numAverageMeasurements = 8;
+  for (int i = 0; i < numAverageMeasurements; ++i)
+  {
+    totalVoltage += humiditySensorPin_->readVoltage();
+  }
+  
+  return totalVoltage/numAverageMeasurements;
 }

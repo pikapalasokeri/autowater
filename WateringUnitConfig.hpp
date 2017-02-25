@@ -12,6 +12,7 @@ public:
 		     int sensorPin,
 		     double humidityThreshold,
 		     int interval,
+		     int waitIterations,
 		     const std::string& name,
 		     const std::string& logFilePath);
   char inqPumpAdress() const { return pumpAdress_; }
@@ -20,6 +21,7 @@ public:
   int inqSensorPin() const { return sensorPin_; }
   double inqHumidityThreshold() const { return humidityThreshold_; }
   int inqInterval() const { return interval_; }
+  int inqWaitIterations() const { return waitIterations_; }
   std::string inqName() const { return name_; }
   std::string inqLogFilePath() const { return logFilePath_; }
 private:
@@ -29,6 +31,7 @@ private:
   int sensorPin_;
   double humidityThreshold_;
   int interval_;
+  int waitIterations_;
   std::string name_;
   std::string logFilePath_;
 };

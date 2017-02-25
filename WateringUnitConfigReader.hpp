@@ -25,6 +25,7 @@ private:
   boost::optional<int> sensorPin_;
   boost::optional<double> humidityThreshold_;
   boost::optional<int> interval_;
+  boost::optional<int> waitIterations_;
   boost::optional<std::string> name_;
   boost::optional<std::string> logFilePath_;
     
